@@ -1,5 +1,5 @@
 {
-  "name": "3ree",
+  "name": "3rek",
   "version": "1.0.0",
   "description": "",
   "main": "webpack.config.js",
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/NgoKnows/3REE.git"
+    "url": "git+https://github.com/NgoKnows/3REK.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/NgoKnows/3REE/issues"
+    "url": "https://github.com/NgoKnows/3REK/issues"
   },
-  "homepage": "https://github.com/NgoKnows/3REE#readme",
+  "homepage": "https://github.com/NgoKnows/3REK#readme",
   "dependencies": {
     "immutable": "^3.7.5",
     "koa": "^1.1.0",
