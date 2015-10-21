@@ -6,7 +6,7 @@ import { compose, createStore, applyMiddleware } from 'redux';
 import { devTools, persistState } from 'redux-devtools';
 import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
 
-import App from './App'
+import App from './App.es6'
 import Reducer from '../reducers/reducer'
 
 const finalCreateStore = compose(

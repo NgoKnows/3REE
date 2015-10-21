@@ -1,17 +1,38 @@
 'use strict';
-var app = require("koa")();
-var path = require("path");
-var route = require("koa-route");
-var serve = require("koa-static");
-var r = require("rethinkdb");
+import Koa from 'koa'
+import path from 'path'
+import router from 'koa-router'
+import serve from 'koa-static'
+import r from 'rethinkdb'
+import http from 'http'
+import SocketIO from 'socket.io'
+import webpack from 'webpack'
 
-var port = process.env.PORT || 8000;
+import * as eventService from './server/api/api.js'
+import config from './webpack.config'
 
-var indexPath = path.resolve(__dirname, 'client');
+const app = Koa();
+const compiler = webpack(config);
+const httpServer = http.Server(app.callback());
+const port = process.env.PORT || 8000;
 
-app.use(serve('build'));
+let io = SocketIO(httpServer)
+
+//serve up new builds
+app.use(require('koa-webpack-dev-middleware')(compiler, {
+    noInfo: true,
+    publicPath: config.output.publicPath
+}));
+
+//spit out new builds
+app.use(require('koa-webpack-hot-middleware')(compiler));
+
 app.use(serve(path.resolve('client')));
 
-app.listen(port, function() {
+httpServer.listen(port, () => {
     console.log('App is listening on port', port);
 });
+
+//sets up live updating
+eventService.liveUpdates(io);
+

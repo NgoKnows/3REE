@@ -20,9 +20,7 @@ class App extends Component {
     }
 }
 
-App.propTypes = {
-    blah : PropTypes.object.isRequired
-};
+App.propTypes = {};
 
 function mapStateToProps(state) {
     return {
