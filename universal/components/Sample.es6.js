@@ -6,7 +6,7 @@ export default class Sample extends Component {
     render() {
         const {} = this.props;
         return (
-            <div>This is a sample component</div>
+            <div style={STYLES}>HOT MODULE RELOADING</div>
         )
     }
 }
@@ -14,7 +14,7 @@ export default class Sample extends Component {
 Sample.PropTypes = {
     changeText : PropTypes.func.isRequired,
     text       : PropTypes.string.isRequired,
-    readOnly : PropTypes.bool
+    readOnly   : PropTypes.bool
 };
 
 Sample.defaultProps = {
@@ -22,4 +22,6 @@ Sample.defaultProps = {
     changeText: () => {}
 };
 
-const STYLES = {};
+const STYLES = {
+    color: 'pink'
+}
