@@ -1,7 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import Radium from 'radium'
 
-@Radium
 export default class Sample extends Component {
     render() {
         const {} = this.props;

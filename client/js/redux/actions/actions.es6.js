@@ -1,4 +1,4 @@
-import { ADD_TODO } from '../constants/constants'
+import { ADD_TODO } from '../constants/constants.es6'
 import Immutable from 'immutable'
 
 export function addTodo(todo) {

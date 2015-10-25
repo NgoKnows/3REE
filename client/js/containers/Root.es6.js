@@ -6,8 +6,8 @@ import { compose, createStore, applyMiddleware } from 'redux';
 import { devTools, persistState } from 'redux-devtools';
 import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
 
-import App from './App.es6'
-import Reducer from '../reducers/reducer'
+import Reducer from 'flux/reducers/reducer'
+import App from './App'
 
 const finalCreateStore = compose(
     applyMiddleware(thunk)
