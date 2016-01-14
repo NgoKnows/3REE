@@ -1,5 +1,5 @@
 import r from 'rethinkdb'
-import config from '../config.json'
+import config from '../../config.json'
 
 function connect() {
     return r.connect(config);
@@ -10,7 +10,7 @@ export function liveUpdates(io) {
     connect()
     .then((conn) => {
         r
-        .table('authors')
+        .table('events')
         .changes().run(conn, (err, cursor) => {
             console.log('Listening for changes...')
             cursor.each((err, change) => {

@@ -4,10 +4,10 @@ var ROOT_DIR = __dirname;
 
 module.exports = {
     context: ROOT_DIR,
-
+    //devtool: 'inline-source-map',
     entry: [
-        'webpack-hot-middleware/client?reload=true',
-        path.resolve(ROOT_DIR, 'client', 'js', 'index.es6.js')
+        'webpack-hot-middleware/client',
+        path.resolve(ROOT_DIR, 'client', 'js', 'index.js')
     ],
 
     resolve: {
@@ -34,13 +34,22 @@ module.exports = {
     module: {
         loaders: [
             {
-                test: /\.es6.js$/,
+                test: /\.js$/,
                 loader: 'babel',
                 exclude: path.join(ROOT_DIR, 'node_modules'),
                 query: {
-                    stage: 1
+                    "presets": ["es2015", "react", "stage-0"],
+                    "env": {
+                        "development": {
+                            "presets": ["react-hmre"]
+                        }
+                    }
                 }
-            }
+            },
+            {
+                test: /\.css$/,
+                loader: "style-loader!css-loader"
+            },
         ]
     }
 };

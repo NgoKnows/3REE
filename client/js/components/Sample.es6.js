@@ -4,7 +4,10 @@ export default class Sample extends Component {
     render() {
         const {} = this.props;
         return (
-            <div style={STYLES}>HOT MODULE RELOADING</div>
+            <div>
+                <div style={STYLES}>HOT MODULE RELOADING WORKS NOW</div>
+                <div>WHAYTASDTASTdsaf</div>
+            </div>
         )
     }
 }
