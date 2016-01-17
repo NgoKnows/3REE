@@ -14,7 +14,7 @@ import { Router, match, RouterContext, createRoutes, browserHistory } from 'reac
 
 export function *handleRender() {
     // Create a new Redux store instance
-    const store = composeStore();
+    const store = composeStore(this.url);
 
     // Grab the initial state from our Redux store
     const initialState = store.getState()

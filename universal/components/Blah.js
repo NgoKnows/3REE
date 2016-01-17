@@ -5,7 +5,7 @@ class Blah extends Component {
     render() {
         return (
             <div>
-                <div style={STYLES}>This is the blah component</div>
+                <div style={STYLES}>This is the blah component! Woah!</div>
             </div>
         )
     }
