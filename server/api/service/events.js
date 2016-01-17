@@ -3,13 +3,13 @@ import config from '../../config.json'
 
 function connect() {
     return r.connect(config);
-}
+};
 
 export function liveUpdates(io) {
     console.log('Setting up live updates...');
     connect()
     .then((conn) => {
-        r
+        return r
         .table('events')
         .changes().run(conn, (err, cursor) => {
             console.log('Listening for changes...')
@@ -19,4 +19,4 @@ export function liveUpdates(io) {
             })
         })
     })
-}
+};

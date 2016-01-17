@@ -1,4 +1,6 @@
-import { ADD_TODO } from '../constants/constants.es6'
+import { ADD_TODO } from '../constants/constants'
+import { routeActions } from 'redux-simple-router'
+
 import Immutable from 'immutable'
 
 export function addTodo(todo) {
@@ -13,3 +15,7 @@ export function thunk(blah) {
         //do stuff
     }
 }
+
+// Router
+// --------------------------------------------------
+export const { push, replace, go, goForward, goBack } = routeActions

@@ -1,9 +1,15 @@
 import React from 'react'
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom'
 
-import Root from 'js/containers/Root'
 import setUpRealtime from './Realtime'
+import composeStore from 'universal/CreateStore'
 
-ReactDOM.render(<Root />, document.getElementById('container'));
+import Root from 'containers/Root'
+import Router from 'universal/Router'
+import Wrapper from 'containers/Wrapper'
+
+const store = composeStore();
+
+ReactDOM.render(<Root routes={<Router />} store={store}/>, document.getElementById('root'));
 
 setUpRealtime();

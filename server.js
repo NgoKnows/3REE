@@ -9,14 +9,11 @@ import webpackHotMiddleware from 'koa-webpack-hot-middleware'
 
 import webpack from 'webpack'
 
-import devConfig from './webpack.config.dev'
-import prodConfig from './webpack.config.prod'
-
 let config;
 if (process.env.NODE_ENV !== 'production') {
-    config = devConfig
+    config = require('./webpack.config.dev');
 } else {
-    config = prodConfig
+    config = require('./webpack.config.prod');
 }
 
 const compiler = webpack(config);
@@ -30,12 +27,18 @@ if (process.env.NODE_ENV !== 'production') {
     app.use(webpackHotMiddleware(compiler));
 }
 
-// Serve Static Files
-// --------------------------------------------------
-import path from 'path'
-import serve from 'koa-static'
 
-app.use(serve(path.resolve('client')))
+//// Serve Static Files
+//// --------------------------------------------------
+//import path from 'path'
+//import serve from 'koa-static'
+//
+//app.use(serve(path.resolve('client')))
+
+// Server-Side Rendering
+// --------------------------------------------------
+import { handleRender } from './server/render'
+app.use(handleRender)
 
 
 // Error Handling

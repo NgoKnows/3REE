@@ -1,25 +1,25 @@
 import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
-import * as actions from 'flux/actions/actions'
-import Sample from 'components/Sample'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+
+import * as actions from '../redux/actions/actions'
+import Sample from '../components/Sample'
 
 class App extends Component {
     render() {
-        const { dispatch, ...other } = this.props;
-
-        const boundActions = bindActionCreators(actions, dispatch);
+        const { actions, ...other } = this.props;
 
         return (
             <div style={STYLES}>
-                <Sample />
+                {this.props.children}
+                <div onClick={() => actions.push('/blah')}>blah</div>
             </div>
-        )
+        );
     }
 }
 
-App.propTypes = {};
+App.propTypes = {}
 
 function mapStateToProps(state) {
     return {
@@ -27,6 +27,12 @@ function mapStateToProps(state) {
     };
 }
 
-const STYLES = {};
+function mapDispatchToProps(dispatch) {
+    return {
+        actions : bindActionCreators(actions, dispatch)
+    };
+}
 
-export default connect(mapStateToProps)(App);
+const STYLES = {}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

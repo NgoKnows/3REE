@@ -14,9 +14,11 @@ module.exports = {
         alias : {
             react: path.join(__dirname, 'node_modules', 'react'),
             classes: path.join(ROOT_DIR, 'client', 'js', 'classes'),
-            components: path.join(ROOT_DIR, 'client', 'js', 'components'),
-            flux: path.join(ROOT_DIR, 'client', 'js', 'redux'),
-            js: path.join(ROOT_DIR, 'client', 'js')
+            components: path.join(ROOT_DIR, 'universal', 'components'),
+            containers: path.join(ROOT_DIR, 'universal', 'containers'),
+            flux: path.join(ROOT_DIR, 'universal', 'redux'),
+            js: path.join(ROOT_DIR, 'client', 'js'),
+            universal: path.join(ROOT_DIR, 'universal')
         }
     },
 
