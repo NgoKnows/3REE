@@ -4,33 +4,32 @@ var ROOT_DIR = __dirname;
 
 module.exports = {
     context: ROOT_DIR,
-    //devtool: 'inline-source-map',
+
     entry: [
         'webpack-hot-middleware/client',
         path.resolve(ROOT_DIR, 'client', 'js', 'index.js')
     ],
 
     resolve: {
-        extensions: ['', '.js', '.jsx', '.es6.js'],
-        alias : {
-            react: path.join(__dirname, 'node_modules', 'react'),
-            classes: path.join(ROOT_DIR, 'client', 'js', 'classes'),
-            components: path.join(ROOT_DIR, 'universal', 'components'),
-            containers: path.join(ROOT_DIR, 'universal', 'containers'),
-            flux: path.join(ROOT_DIR, 'universal', 'redux'),
-            js: path.join(ROOT_DIR, 'client', 'js'),
-            universal: path.join(ROOT_DIR, 'universal')
+        extensions: ['', '.js', '.jsx'],
+        alias: {
+            react: path.join(ROOT_DIR, 'node_modules', 'react'),
+            universal: path.join(ROOT_DIR, 'universal'),
+            containers: path.join(ROOT_DIR, 'universal', 'containers')
+
         }
     },
 
     output: {
-        path: path.join(ROOT_DIR,'build'),
+        publicPath: "/",
+        path: path.join(ROOT_DIR, 'build'),
         filename: 'bundle.js'
     },
 
     plugins: [
+        new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoErrorsPlugin()
+        new webpack.NoErrorsPlugin(),
     ],
 
     module: {
@@ -48,10 +47,22 @@ module.exports = {
                     }
                 }
             },
+
+            {
+                test: /\.(jpg|png|woff|woff2|eot|ttf|svg|otf|pdf)$/,
+                loader: 'url-loader?limit=10000'
+            },
+
             {
                 test: /\.css$/,
                 loader: "style-loader!css-loader"
             },
+
+            {
+                test: /\.json$/,
+                loader: 'json-loader'
+            }
         ]
     }
-};
+}
+
