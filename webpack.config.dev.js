@@ -14,8 +14,7 @@ module.exports = {
         extensions: ['', '.js', '.jsx'],
         alias: {
             react: path.join(ROOT_DIR, 'node_modules', 'react'),
-            universal: path.join(ROOT_DIR, 'universal'),
-            containers: path.join(ROOT_DIR, 'universal', 'containers')
+            containers: path.join(ROOT_DIR, 'client', 'js', 'containers')
 
         }
     },
@@ -39,7 +38,8 @@ module.exports = {
                 loader: 'babel',
                 exclude: path.join(ROOT_DIR, 'node_modules'),
                 query: {
-                    "presets": ["es2015", "react", "stage-0"],
+                    presets: ["es2015", "react", "stage-0"],
+                    plugins: ["transform-decorators"],
                     "env": {
                         "development": {
                             "presets": ["react-hmre"]

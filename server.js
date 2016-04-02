@@ -28,18 +28,12 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 
-//// Serve Static Files
-//// --------------------------------------------------
-//import path from 'path'
-//import serve from 'koa-static'
-//
-//app.use(serve(path.resolve('client')))
-
-// Server-Side Rendering
+// Serve Static Files
 // --------------------------------------------------
-import { handleRender } from './server/render'
-app.use(handleRender)
+import path from 'path'
+import serve from 'koa-static'
 
+app.use(serve(path.resolve('client')))
 
 // Error Handling
 // --------------------------------------------------
@@ -53,19 +47,9 @@ app.use(function *(next) {
     }
 });
 
-//Turn off warnings in Bluebird
-import bluebird from 'bluebird'
-
-bluebird.config({
-    warnings: false,
-})
-
 
 //// Routing
 //// --------------------------------------------------
-//import * as factualAPI from './server/api/factualAPI'
-//import * as eventAPI from './server/api/eventsAPI'
-//
 //import router from 'koa-router'
 //import bodyParser from 'koa-body'
 //
@@ -98,11 +82,11 @@ httpServer.listen(port, () => {
 });
 
 
-// Live Updating
-// --------------------------------------------------
-import * as eventService from './server/api/service/events'
-import SocketIO from 'socket.io'
-
-let io = SocketIO(httpServer)
-
-eventService.liveUpdates(io);
+//// Live Updating
+//// --------------------------------------------------
+//import * as eventService from './server/api/service/events'
+//import SocketIO from 'socket.io'
+//
+//let io = SocketIO(httpServer)
+//
+//eventService.liveUpdates(io);
