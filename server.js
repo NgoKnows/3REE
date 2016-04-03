@@ -1,13 +1,13 @@
-'use strict';
-import Koa from 'koa'
-const app = Koa();
+import Koa from 'koa';
+import convert from 'koa-convert';
+const app = new Koa();
 
 // Webpack and Hot Module Reloading :)
 // --------------------------------------------------
-import webpackDevMiddleware from 'koa-webpack-dev-middleware'
-import webpackHotMiddleware from 'koa-webpack-hot-middleware'
+import webpackDevMiddleware from 'koa-webpack-dev-middleware';
+import webpackHotMiddleware from 'koa-webpack-hot-middleware';
 
-import webpack from 'webpack'
+import webpack from 'webpack';
 
 let config;
 if (process.env.NODE_ENV !== 'production') {
@@ -18,61 +18,44 @@ if (process.env.NODE_ENV !== 'production') {
 
 const compiler = webpack(config);
 
-app.use(webpackDevMiddleware(compiler, {
+app.use(convert(webpackDevMiddleware(compiler, {
     noInfo: true,
     publicPath: config.output.publicPath
-}));
+})));
 
 if (process.env.NODE_ENV !== 'production') {
-    app.use(webpackHotMiddleware(compiler));
+    app.use(convert(webpackHotMiddleware(compiler)));
 }
 
 
 // Serve Static Files
 // --------------------------------------------------
-import path from 'path'
-import serve from 'koa-static'
+import path from 'path';
+import serve from 'koa-static';
 
-app.use(serve(path.resolve('client')))
+app.use(convert(serve(path.resolve('client'))));
 
-// Error Handling
+// Routing
 // --------------------------------------------------
-app.use(function *(next) {
-    try {
-        yield next;
-    } catch (err) {
-        this.status = err.status || 500;
-        this.body = err.message;
-        this.app.emit('error', err, this);
+import router from 'koa-router';
+import bodyParser from 'koa-bodyparser';
+
+const myRouter = router();
+
+app.use(bodyParser({
+    onerror(err, ctx) {
+        ctx.throw('body parse error', 422);
     }
-});
+}));
 
-
-//// Routing
-//// --------------------------------------------------
-//import router from 'koa-router'
-//import bodyParser from 'koa-body'
-//
-//let myRouter = router();
-//let myBodyParser = bodyParser();
-//
-//myRouter
-//    .get('/api/suggestions/:searchTerm', factualAPI.getSuggestions)
-//    .get('/api/business/:id', factualAPI.getPlaceInfo)
-//
-//myRouter
-//    .get('/api/events', eventAPI.getEvents)
-//    .get('/api/events/:id', eventAPI.getEvent)
-//    .post('/api/events', myBodyParser, eventAPI.addEvent)
-//
-//app
-//    .use(myRouter.routes())
-//    .use(myRouter.allowedMethods());
+app
+    .use(myRouter.routes())
+    .use(myRouter.allowedMethods());
 
 
 // Start Server
 // --------------------------------------------------
-import http from 'http'
+import http from 'http';
 
 const httpServer = http.Server(app.callback());
 const port = process.env.PORT || 8000;

@@ -1,22 +1,32 @@
-import React, { Component, PropTypes } from 'react';
+// @flow
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { routerActions } from 'react-router-redux';
 
+import Sample from '../components/Sample';
+
+type Props = {};
 class App extends Component {
-    render() {
+    static defaultProps: void;
+    state: void;
+    props: Props;
+
+    render(): React.Element {
         const {} = this.props;
 
-        return (<div>HIIII!!!</div>);
+        return (
+            <div>
+                <Sample />
+            </div>
+        );
     }
 }
 
-const STYLES = {};
-
-App.propTypes = {};
-
 function mapStateToProps(state) {
-    return {};
+    return {
+
+    };
 }
 
 function mapDispatchToProps(dispatch) {

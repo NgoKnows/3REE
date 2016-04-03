@@ -39,7 +39,7 @@ module.exports = {
                 exclude: path.join(ROOT_DIR, 'node_modules'),
                 query: {
                     presets: ["es2015", "react", "stage-0"],
-                    plugins: ["transform-decorators"],
+                    plugins: ["transform-decorators-legacy"],
                     "env": {
                         "development": {
                             "presets": ["react-hmre"]

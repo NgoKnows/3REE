@@ -17,7 +17,9 @@ function FadeAnimation(props) {
     );
 }
 
-FadeAnimation.propTypes = {};
+FadeAnimation.propTypes = {
+    children: PropTypes.element.isRequired
+};
 FadeAnimation.defaultProps = {};
 
 export default Radium(FadeAnimation);
